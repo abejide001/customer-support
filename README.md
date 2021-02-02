@@ -18,7 +18,7 @@ To work with this project you need to have the following installed on your local
 
 1. [NodeJS](https://nodejs.org)
 2. [Git](https://git-scm.com/downloads)
-3. [MongoDB](https://docs.mongodb.com/manual/installation/) For local development vanilla mongodb without authentication is expect and it should be listening on localhost:27017
+3. [MongoDB](https://docs.mongodb.com/manual/installation/) For local development vanilla mongodb without authentication is expected and it should be listening on localhost:27017
 4. [Postman](https://www.postman.com/downloads/)
 
 ## Install and run locally
@@ -88,17 +88,17 @@ API BASE URL(<https://customer-support-2021.herokuapp.com/api/v1>). It's recomme
 // login as admin
 {
   email: "abejide@gmail.com",
-  password: "abcde"
+  password: "abcdef"
 }
 // login as customer
 {
   email: "femi@gmail.com",
-  password: "abcde"
+  password: "abcdef"
 }
 // login as agent
 {
   email: "ade@gmail.com",
-  password: "abcde"
+  password: "abcdef"
 }
 ```
 
@@ -112,8 +112,13 @@ API BASE URL(<https://customer-support-2021.herokuapp.com/api/v1>). It's recomme
 
 ## Improvement
 
-- Customers should be able to comment after they created a ticket, incase they figured out the solution after raising the support ticket, and they don't need further assistance
+- Customers should be able to comment after they created a ticket, incase they figured out the solution to the problem after raising the support ticket, and they don't need further assistance.
+- A customer should be able to report an agent if a ticket was handled misappropiately
+
+## Challenges faced
+
+The report for the previous month is always generated when a call is made to the endpoint to get the report, I initially tried to upload the report to cloudinary but that caused duplication of different reports on clouinary, download as pdf option can be implemented on the frontend.
 
 ## Author
 
-Abejide Femi
+Abejide Femi - abejidefemi1@gmail.com

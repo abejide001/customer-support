@@ -35,7 +35,7 @@ it("returns 403 if it is not a customer that is trying to create a ticket", asyn
   expect(response.status).toEqual(403);
 });
 
-it("returns 422 if an invalid description is provided", async () => {
+it("returns 422 if the description is less than 10", async () => {
   await request(app)
     .post("/api/v1/tickets")
     .set("Authorization", `Bearer ${global.customerSignIn()}`)

@@ -29,12 +29,23 @@ it("should return 422 when an invalid email is provided", async () => {
 });
 
 
-it("should return 422 when an invalid password is provided", async () => {
+it("should return 422 when password is not provided", async () => {
   await request(app)
     .post("/api/v1/auth/signin")
     .send({
       email: "abab@gmail.com",
-      password: "e"
+      password: ""
+    })
+    .expect(422);
+});
+
+
+it("should return 422 when password is less than 4", async () => {
+  await request(app)
+    .post("/api/v1/auth/signin")
+    .send({
+      email: "abab@gmail.com",
+      password: "ba"
     })
     .expect(422);
 });

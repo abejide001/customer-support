@@ -24,7 +24,7 @@ const updateUser = async (req: Request, res: Response) => {
     }
   
     user.set({
-      role: req.body.state,
+      role: req.body.role,
     });
     await user.save();
     sendSuccessResponse(res, 200, "User role updated", user);

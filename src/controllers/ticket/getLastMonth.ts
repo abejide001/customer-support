@@ -30,7 +30,7 @@ const getLastMonth = async (req: any, res: any) => {
     const ticket = await Ticket.aggregate([
       {
         $match: {
-          state: { $eq: "in-review" },
+          state: { $eq: "closed" },
         },
       },
       {
