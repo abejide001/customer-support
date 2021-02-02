@@ -1,5 +1,7 @@
 # Customer Support
 
+[![CircleCI](https://circleci.com/gh/abejide001/assessment.svg?style=svg)](https://app.circleci.com/pipelines/github/abejide001/assessment/54a914c3-105e-4010-bbb6-281cfcfb8451)
+
 Customer support API
 
 ## Introduction
@@ -54,33 +56,33 @@ API BASE URL(<https://customer-support-2021.herokuapp.com/api/v1>). It's recomme
 
 ### Tickets endpoints `/tickets`
 
-| method | route              | description                         | data                                 |priviledge
-| ------ | --------------     | ------------------------------------| -------------------------------------|------------
-| GET    | /                  | Get all tickets                     |                                      |customer
-| GET    | /:month            | Get tickets for the previous month  |                                      |agent
-| POST   | /                  | Create a ticket                     |   `{description}`                    |customer
-| GET    | /process           | Get ticket to process               |                                      |agent
-| PATCH | /process/:ticketId  | Process a ticket                    |    `{state}`                         |agent
+| method | route              | description                        | data            | priviledge |
+|--------|--------------------|------------------------------------|-----------------|------------|
+| GET    | /                  | Get all tickets                    |                 | customer   |
+| GET    | /:month            | Get tickets for the previous month |                 | agent      |
+| POST   | /                  | Create a ticket                    | `{description}` | customer   |
+| GET    | /process           | Get ticket to process              |                 | agent      |
+| PATCH  | /process/:ticketId | Process a ticket                   | `{state}`       | agent      |
 
 ### Comment endpoint `/comments`
 
-| method | route            | description          | data                            |priviledge
-| ------ | ---------------- | -------------------- | ------------------------------- |-------------
-| POST   | /:ticketId       | Create a comment     | `{comment}`                     |agent, customer
+| method | route      | description      | data        | priviledge      |
+|--------|------------|------------------|-------------|-----------------|
+| POST   | /:ticketId | Create a comment | `{comment}` | agent, customer |
 
 ### Authentication endpoints `/auth`
 
-| method | route        | description               | data                                          |priviledge
-| ------ | ------------ | ------------------------- | ----------------------------------------------|----------
-| POST   | /sigin       | Sign In                   | `{email, password}`                           |admin, agent, customer
-| POST   | /signup      | Sign up                   | `{email, password}`                           |admin, agent, customer
+| method | route   | description | data                | priviledge             |
+|--------|---------|-------------|---------------------|------------------------|
+| POST   | /sigin  | Sign In     | `{email, password}` | admin, agent, customer |
+| POST   | /signup | Sign up     | `{email, password}` | admin, agent, customer |
 
 ### User endpoints `/users`
 
-| method | route            | description               |priviledge
-| ------ | -----------------| ------------------------- |-----------
-| GET    | /                | Get all users             |admin
-| PATCH  | /:id             | Edit a user               |admin
+| method | route | description   | priviledge |
+|--------|-------|---------------|------------|
+| GET    | /     | Get all users | admin      |
+| PATCH  | /:id  | Edit a user   | admin      |
 
 ```javascript
 // login as admin
@@ -107,6 +109,10 @@ API BASE URL(<https://customer-support-2021.herokuapp.com/api/v1>). It's recomme
 ## App URL
 
 <https://customer-support-2021.herokuapp.com/api/v1>
+
+## Improvement
+
+- Customers should be able to comment after they created a ticket, incase they figured out the solution after raising the support ticket, and they don't need further assistance
 
 ## Author
 
