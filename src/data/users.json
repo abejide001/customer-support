@@ -1,0 +1,18 @@
+[{
+  "_id" : "6014ab54db4c213adb4ec872",
+  "role" : "admin",
+  "email" : "abejide@gmail.com",
+  "password" : "b567a4e6b0df60ec17cac18e7920bc8e74b6bfbbf7b3dd65a80f2c992a518f698b395fb311bf12e8962f604a38de50291f86e927d01b3d4ab17908a9e0ba031f.5593fa478c2754ca"
+},
+{
+  "_id" : "6014abf2dd17a1413188d978",
+  "role" : "customer",
+  "email" : "femi@gmail.com",
+  "password" : "2bd3bd5b392840c2efd38e242014f771136035dbf36c648c40cea0db59a5537f916f1bc698d822806ae41b2528c16050063495a977107073b340c242fc5bfb0a.8ea190802f90bf75"
+},
+  {
+    "_id" : "6014acb373cde645a8f5c3f0",
+    "role" : "agent",
+    "email" : "ade@gmail.com",
+    "password" : "345c4e2eedc183287f07dd12614429faf1552ee002210acb491368a3616acf87e9d05950b3455eb56dce780317f3fb68720f67acb3c43bdf4f6db068021b4db9.54ab9d1a6dc0b9c4"
+}]
