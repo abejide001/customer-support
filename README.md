@@ -1,6 +1,6 @@
 # Customer Support
 
-[![CircleCI](https://circleci.com/gh/abejide001/assessment.svg?style=svg)](https://app.circleci.com/pipelines/github/abejide001/assessment/54a914c3-105e-4010-bbb6-281cfcfb8451)
+[![CircleCI](https://circleci.com/gh/abejide001/customer-support.svg?style=svg)](https://app.circleci.com/pipelines/github/abejide001/customer-support/54a914c3-105e-4010-bbb6-281cfcfb8451)
 
 Customer support API
 
@@ -24,8 +24,8 @@ To work with this project you need to have the following installed on your local
 ## Install and run locally
 
 ```bash
-git clone https://github.com/abejide001/assessment.git
-cd asssessment
+git clone https://github.com/abejide001/customer-support.git
+cd customer-support
 
 export
 MONGOMS_DOWNLOAD_URL=http://downloads.mongodb.org/linux/mongodb-linux-x86_64-debian10-latest.tgz
@@ -38,8 +38,8 @@ NODE_ENV=development npm run start:dev # dev environment
 ## Running Tests
 
 ```bash
-git clone https://github.com/abejide001/assessment.git
-cd asssessment
+git clone https://github.com/abejide001/customer-support.git
+cd customer-support
 
 # rename .env.sample to .env, and set your environment variables -- no username&password for local database
 
