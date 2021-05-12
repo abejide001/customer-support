@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 # Install app dependencies
 COPY package*.json ./
 # Install dev dependencies only
-RUN npm install --only=prod
+RUN npm install
 # Copy app source code
 COPY . .
 #Expose port and start application

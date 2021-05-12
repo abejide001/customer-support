@@ -1,17 +1,15 @@
-version: "3"
+version: "3.4"
 services: 
     app:
         container_name: assessment
         restart: always
-        build: .
+        build:
+          context: .
+          # network: host
         ports: 
-          - "9000:9000"
-        links: 
-          - mongo
+          - "3000:9000"
     mongo:
         container_name: mongo
         image: mongo
         volumes:
           - ./data:/data/db
-        ports: 
-          - "27017:27017"
