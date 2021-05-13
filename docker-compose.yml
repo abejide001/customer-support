@@ -5,7 +5,7 @@ services:
         restart: always
         build:
           context: .
-          # network: host
+          network: host
         ports: 
           - "3000:9000"
     mongo:
@@ -13,3 +13,4 @@ services:
         image: mongo
         volumes:
           - ./data:/data/db
+        command: mongod --port 27017 --bind_ip_all

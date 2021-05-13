@@ -1,0 +1,765 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Handling support request in an efficient manner",
+        "version": "1.0.0",
+        "title": "Customer support center",
+        "contact": {
+            "email": "abejidefemi1@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/api/v1",
+    "securityDefinitions": {
+        "bearerAuth": {
+            "type": "apiKey",
+            "scheme": "bearer",
+            "description": "You are required to pass the JWT token received upon signup and signin in the headers to access secured endpoint, required input format: \"Bearer \\<token\\>\"",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Register and login users"
+        },
+        {
+            "name": "User",
+            "description": "Edit and get users"
+        },
+        {
+            "name": "Ticket",
+            "description": "Create, edit, process, get last month, and get all support request"
+        },
+        {
+            "name": "Comment",
+            "description": "Comments on support request"
+        }
+    ],
+    "schemes": ["http", "https"],
+    "paths": {
+        "/auth/signin": {
+            "post": {
+                "tags": ["Auth"],
+                "summary": "Logs user into the system",
+                "description": "",
+                "operationId": "loginUser",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "signin",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "example": "johndoe@company.com"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "password"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "title": "Success",
+                            "example": {
+                                "status": "success",
+                                "message": "User logged in Successfully",
+                                "data": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Invalid email and password error",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": {}
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User authorization error",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": "Incorrect email or password"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/signup": {
+            "post": {
+                "summary": "User signup",
+                "tags": ["Auth"],
+                "operationId": "SignupPost",
+                "deprecated": false,
+                "produces": ["application/json"],
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "title": "Success",
+                            "example": {
+                                "status": "success",
+                                "data": {}
+                            }
+                        },
+                        "description": "",
+                        "headers": {}
+                    },
+                    "422": {
+                        "schema": {
+                            "title": "Fail",
+                            "example": {
+                                "status": "fail",
+                                "error": {
+                                    "email": "email must be valid",
+                                    "password": "Password must be between 4 and 20 characters"
+                                }
+                            }
+                        },
+                        "description": "",
+                        "headers": {}
+                    },
+                    "409": {
+                        "schema": {
+                            "title": "Fail",
+                            "example": {
+                                "status": "fail",
+                                "error": "Email already exist"
+                            }
+                        },
+                        "description": "",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "description": "Endpoint to enable admin get all users",
+                "summary": "Get all users(admin)",
+                "tags": ["User"],
+                "operationId": "UsersGet",
+                "deprecated": false,
+                "produces": ["application/json"],
+                "consumes": ["application/x-www-form-urlencoded"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "title": "Success",
+                            "example": {
+                                "status": "success",
+                                "message": "User fetched successfully",
+                                "data": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User authorization error",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": "Forbidden"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "patch": {
+                "tags": ["User"],
+                "summary": "Update user role(admin)",
+                "produces": ["application/json"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "role",
+                        "in": "formData",
+                        "description": "update user role(customer, agent, admin)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "User not found",
+                        "schema": {
+                            "title": "Fail",
+                            "example": {
+                                "status": "success",
+                                "message": "User not found",
+                                "data": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User authorization error",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User Forbidden",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Update user role",
+                        "schema": {
+                            "title": "Success",
+                            "example": {
+                                "status": "success",
+                                "message": "User role updated",
+                                "data": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tickets": {
+            "get": {
+                "tags": ["Ticket"],
+                "summary": "Get tickets(customer)",
+                "description": "",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Get support requests(customer)",
+                        "schema": {
+                            "title": "Success",
+                            "example": {
+                                "status": "success",
+                                "message": "Tickets fetched successfully",
+                                "data": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User authorization error",
+                        "schema": {
+                            "example": {
+                                "status": "fail",
+                                "error": ""
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User forbidden",
+                        "schema": {
+                            "example": {
+                                "status": "fail",
+                                "error": ""
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tickets/": {
+            "post": {
+                "summary": "Create a support request(customer)",
+                "tags": ["Ticket"],
+                "operationId": "CreateTicket",
+                "deprecated": false,
+                "produces": ["application/json"],
+                "consumes": ["application/x-www-form-urlencoded"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful request",
+                        "schema": {
+                            "title": "Success",
+                            "example": {
+                                "status": "success",
+                                "data": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "User authorization error",
+                        "schema": {
+                            "example": {
+                                "status": "fail",
+                                "error": ""
+                            }
+                        }
+                    },
+                    "422": {
+                        "schema": {
+                            "title": "Fail",
+                            "example": {
+                                "status": "fail",
+                                "error": {}
+                            }
+                        },
+                        "description": "",
+                        "headers": {}
+                    },
+                    "409": {
+                        "schema": {
+                            "title": "Fail",
+                            "example": {
+                                "status": "fail",
+                                "error": "Duplicate ticket not allowed"
+                            }
+                        },
+                        "description": "",
+                        "headers": {}
+                    }
+                }
+            }
+        },
+        "/tickets/process/{ticketId}": {
+            "patch": {
+                "tags": ["Ticket"],
+                "summary": "Process support request(agent)",
+                "operationId": "UpdateTicket",
+                "produces": ["application/json"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "description": "update support request(pending, in-review)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "ticketId",
+                        "in": "path",
+                        "description": "ticket id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "User authorization error",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ticket not found",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User Forbidden",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Ticket updated",
+                        "schema": {
+                            "title": "Success",
+                            "example": {
+                                "status": "success",
+                                "message": "Ticket state updated",
+                                "data": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tickets/{month}": {
+            "get": {
+                "tags": ["Ticket"],
+                "summary": "Get last month request(agent)",
+                "operationId": "LastMonthTicket",
+                "produces": ["application/json"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "month",
+                        "in": "path",
+                        "description": "month",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "User authorization error",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Enter previous month",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User Forbidden",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Ticket fetched",
+                        "schema": {
+                            "title": "Success",
+                            "example": {
+                                "status": "success",
+                                "message": "Closed tickets for month of",
+                                "data": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tickets/process": {
+            "get": {
+                "description": "Endpoint to enable agent get tickets to process",
+                "summary": "Get all tickets to process(agent)",
+                "tags": ["Ticket"],
+                "operationId": "TicketGet",
+                "deprecated": false,
+                "produces": ["application/json"],
+                "consumes": ["application/x-www-form-urlencoded"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true,
+                        "default": "Bearer {token}",
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "title": "Success",
+                            "example": {
+                                "status": "success",
+                                "data": {}
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User authorization error",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": "Forbidden"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "securityDefinitions": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "token",
+                "in": "header"
+            }
+        },
+        "securityDefinitions": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "token",
+                "in": "header"
+            }
+        },
+        "/comments/{ticketId}": {
+            "post": {
+                "tags": ["Comment"],
+                "summary": "Allows customer and agent to comment on a support request",
+                "description": "",
+                "operationId": "CommentOnSupportRequest",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "ticketId",
+                        "in": "path",
+                        "description": "ticket id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "comment",
+                        "in": "formData",
+                        "description": "comment",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "201": {
+                        "description": "Comment Created Successfully",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "success",
+                                    "data": {}
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Ticket not found",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Cannot comment",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "example": {
+                                "application/json; charset=utf-8": {
+                                    "status": "fail",
+                                    "error": ""
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "role": {
+                    "type": "string",
+                    "example": "customer"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "johndoe@company.com"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "xml": {
+                "name": "User"
+            }
+        },
+        "Ticket": {
+            "type": "object",
+            "required": [
+                "description"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "userId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "this is a test"
+                },
+                "state": {
+                    "type": "string",
+                    "example": "pending"
+                }
+            },
+            "xml": {
+                "name": "Ticket"
+            }
+        },
+        "Comment": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "userId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "ticketId": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "comment": {
+                    "type": "string",
+                    "example": "this is a comment"
+                }
+            },
+            "xml": {
+                "name": "Comment"
+            }
+        }
+    }
+}

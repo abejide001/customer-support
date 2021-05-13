@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export default (async function dbConfig() {
   try {
     if (process.env.NODE_ENV === "development") {
-     await mongoose.connect("mongodb://mongo:27017/fliqpay?retryWrites=true", {
+     await mongoose.connect("mongodb://localhost:27017/fliqpay", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
