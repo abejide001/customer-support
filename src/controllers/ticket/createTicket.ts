@@ -17,8 +17,9 @@ import Ticket from "../../models/Ticket";
 
 const createTicket = async (req: any, res: Response) => {
   try {
-    const { description } = req.body;
+    const { description, title } = req.body;
     const ticket = Ticket.build({
+      title,
       description,
       userId: req.user.id,
     });

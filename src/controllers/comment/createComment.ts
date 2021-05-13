@@ -23,10 +23,10 @@ const createComment = async (req: any, res: Response) => {
     const ticket = await Ticket.findById(ticketId);
     const createComment = Comment.build({
       comment,
-      userId: req.user.id
+      userId: req.user.id,
     });
-    await ticket!.comments!.push(createComment)
-    await ticket!.save()
+    await ticket!.comments!.push(createComment);
+    await ticket!.save();
     sendSuccessResponse(
       res,
       201,

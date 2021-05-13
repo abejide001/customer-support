@@ -48,12 +48,13 @@ it("creates a ticket with valid inputs", async () => {
   expect(tickets.length).toEqual(0);
 
   const description = "I cant subscribe";
-
+  const title = "Subscription"
   await request(app)
     .post("/api/v1/tickets")
     .set("Authorization", `Bearer ${global.customerSignIn()}`)
     .send({
       description,
+      title
     })
     .expect(201);
   tickets = await Ticket.find({});

@@ -27,7 +27,7 @@ it("returns a 400 if customer tries to comment first", async () => {
   const response = await request(app)
     .post("/api/v1/tickets")
     .set("Authorization", `Bearer ${global.customerSignIn()}`)
-    .send({ description: "I cant recharge" });
+    .send({ title: "recharge", description: "I cant recharge" });
   await request(app)
     .post(`/api/v1/comments/${response.body.data.id}`)
     .set("Authorization", `Bearer ${global.customerSignIn()}`)
@@ -41,7 +41,7 @@ it("returns a 201 if the agent comments first", async () => {
   const response = await request(app)
     .post("/api/v1/tickets")
     .set("Authorization", `Bearer ${global.customerSignIn()}`)
-    .send({ description: "I cant recharge" });
+    .send({ title: "recharge", description: "I cant recharge" });
   await request(app)
     .post(`/api/v1/comments/${response.body.data.id}`)
     .set("Authorization", `Bearer ${global.agentSignIn()}`)
@@ -55,7 +55,7 @@ it("returns a 201 if the customer tries to comment after the agent has commented
   const response = await request(app)
     .post("/api/v1/tickets")
     .set("Authorization", `Bearer ${global.customerSignIn()}`)
-    .send({ description: "I cant recharge" });
+    .send({ title: "recharge", description: "I cant recharge" });
   await request(app)
     .post(`/api/v1/comments/${response.body.data.id}`)
     .set("Authorization", `Bearer ${global.agentSignIn()}`)

@@ -2,11 +2,13 @@ import mongoose from "mongoose";
 import { commentSchema } from "./Comment";
 
 interface TicketAttrs {
+  title: string
   description: string;
   userId: string;
 }
 
 interface TicketDoc extends mongoose.Document {
+  title: string
   description: string;
   state?: string;
   userId?: string;
@@ -19,6 +21,11 @@ interface TicketModel extends mongoose.Model<TicketDoc> {
 
 const ticketSchema = new mongoose.Schema(
   {
+    title: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     description: {
       type: String,
       required: true,

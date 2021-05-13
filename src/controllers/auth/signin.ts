@@ -1,5 +1,5 @@
 import { Password } from "../../utils/Password";
-import { Request } from "express";
+import { Request, Response } from "express";
 import User from "../../models/User";
 import {
   sendFailureResponse,
@@ -16,26 +16,26 @@ import jwtSign from "../../helpers/token";
  *
  * @return {Object} Return success message and logged in user
  */
-const signin = async (req: Request, res: any) => {
+const signin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.find({ email }).select("-__v")
-    if (user.length === 0) {
+    const user = await User.findOne({ email }).select("-__v");
+    if (!user) {
       sendFailureResponse(res, 401, "Incorrect email or password");
       return;
     }
 
-    const passwordMatch = await Password.compare(user[0].password, password);
+    const passwordMatch = await Password.compare(user.password, password);
 
     if (!passwordMatch) {
       sendFailureResponse(res, 401, "Incorrect email or password");
       return;
     }
     const token = jwtSign({
-      id: user[0].id,
-      role: user[0].role,
-      email: user[0].email,
+      id: user.id,
+      role: user.role,
+      email: user.email,
     });
 
     sendSuccessResponse(res, 200, "User logged in successfully", {

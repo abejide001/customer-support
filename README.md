@@ -35,7 +35,7 @@ NODE_ENV=development npm run seed:dev # seeds dev database
 NODE_ENV=development npm run start:dev # dev environment
 ```
 
-## Running Tests
+## Running **Tests**
 
 ```bash
 git clone https://github.com/abejide001/customer-support.git
@@ -65,8 +65,8 @@ API BASE URL(<https://customer-support-2021.herokuapp.com/api/v1>). It's recomme
 | method | route              | description                        | data            | priviledge |
 |--------|--------------------|------------------------------------|-----------------|------------|
 | GET    | /                  | Get all tickets                    |                 | customer   |
-| GET    | /:month            | Get tickets for the previous month |                 | agent      |
-| POST   | /                  | Create a ticket                    | `{description}` | customer   |
+| GET    | /:month            | Get tickets for the previous month |                        | agent      |
+| POST   | /                  | Create a ticket                    | `{title, description}` | customer   |
 | GET    | /process           | Get ticket to process              |                 | agent      |
 | PATCH  | /process/:ticketId | Process a ticket                   | `{state}`       | agent      |
 
@@ -123,7 +123,7 @@ API BASE URL(<https://customer-support-2021.herokuapp.com/api/v1>). It's recomme
 
 ## Challenges faced
 
-The report for the previous month is always generated when a call is made to the endpoint to get the report, I initially tried to upload the report to cloudinary but that caused duplication of different reports on clouinary, download as pdf option can be implemented on the frontend.
+- The report for the previous month is always generated when a call is made to the endpoint to get the report, I initially tried to upload the report to cloudinary but that caused duplication of different reports on clouinary, download as pdf option can be implemented on the frontend.
 
 ## Author
 

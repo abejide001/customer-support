@@ -7,7 +7,7 @@ services:
           - .env
         build:
           context: .
-          # network: host
+          network: host
         ports: 
           - "3000:9000"
     mongo:

@@ -38,7 +38,7 @@ it("returns a 500 if it is not a valid state", async () => {
   const response = await request(app)
     .post("/api/v1/tickets")
     .set("Authorization", `Bearer ${global.customerSignIn()}`)
-    .send({ description: "I cant recharge" });
+    .send({ title: "recharge", description: "I cant recharge" });
   await request(app)
     .patch(`/api/v1/tickets/process/${response.body.data.id}`)
     .set("Authorization", `Bearer ${global.agentSignIn()}`)
@@ -52,7 +52,7 @@ it("returns a 200 and updates the ticket if the ticket id is valid", async () =>
   const response = await request(app)
     .post("/api/v1/tickets")
     .set("Authorization", `Bearer ${global.customerSignIn()}`)
-    .send({ description: "I cant recharge" });
+    .send({ title: "recharge", description: "I cant recharge" });
   await request(app)
     .patch(`/api/v1/tickets/process/${response.body.data.id}`)
     .set("Authorization", `Bearer ${global.agentSignIn()}`)

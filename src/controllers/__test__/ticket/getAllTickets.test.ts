@@ -5,7 +5,7 @@ const createTicket = () => {
   return request(app)
     .post("/api/tickets")
     .set("Authorization", `Bearer ${global.customerSignIn()}`)
-    .send({ description: "Cant make orders" });
+    .send({ title: "orders", description: "Cant make orders" });
 };
 it("can fetch a list of ticket", async () => {
   await createTicket();

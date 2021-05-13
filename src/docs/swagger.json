@@ -353,6 +353,12 @@
             "in": "formData",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "formData",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {

@@ -1,4 +1,5 @@
 import fs from "fs";
+import { Response, Request } from "express";
 import months from "../../utils/months";
 import Ticket from "../../models/Ticket";
 import {
@@ -17,7 +18,7 @@ import exportToPdf from "../../utils/generatePdf";
  * @return {Object} Returns the ticket for the previous month
  */
 
-const getLastMonth = async (req: any, res: any) => {
+const getLastMonth = async (req: Request, res: Response) => {
   const month = Number(req.params.month);
   let date = new Date();
   let currentMonth = date.getMonth();
