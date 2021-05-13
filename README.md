@@ -50,6 +50,12 @@ npm i
 npm run test
 ```
 
+## Run with Docker
+
+```bash
+docker-compose up --build
+```
+
 ## API Usage
 
 API BASE URL(<https://customer-support-2021.herokuapp.com/api/v1>). It's recommended to attach a `Authorization` Header containing the generated `token` from `/api/v1/auth/signin` to access requests.
