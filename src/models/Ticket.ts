@@ -1,12 +1,14 @@
 import mongoose from "mongoose";
 import { commentSchema } from "./Comment";
 
+// interface required to create a new ticket
 interface TicketAttrs {
   title: string
   description: string;
   userId: string;
 }
 
+// interface that describes what a ticket as
 interface TicketDoc extends mongoose.Document {
   title: string
   description: string;

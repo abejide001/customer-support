@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
 
+// interface required to create a new comment
 interface CommentAttrs {
   comment: string;
   userId: string;
 }
 
+// interface that describes what a comment as
 interface CommentDoc extends mongoose.Document {
   comment: string;
   userId?: string;
