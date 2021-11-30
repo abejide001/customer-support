@@ -3,13 +3,9 @@ import mongoose from "mongoose";
 import jwtSign from "../helpers/token";
 
 declare global {
-  namespace NodeJS {
-    interface Global {
-      customerSignIn(): string;
-      agentSignIn(): string;
-      adminSignIn(): string;
-    }
-  }
+      var customerSignIn: () => string
+      var agentSignIn: () => string
+      var adminSignIn: () => string
 }
 let mongo: any;
 beforeAll(async () => {
