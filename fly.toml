@@ -1,15 +1,15 @@
-# fly.toml app configuration file generated for customer-support-cold-flower-2535 on 2026-04-23T15:28:33+02:00
+# fly.toml app configuration file generated for customer-support-pa7ysq on 2026-04-23T13:39:41Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'customer-support-cold-flower-2535'
+app = 'customer-support-pa7ysq'
 primary_region = 'fra'
 
 [build]
 
 [http_service]
-  internal_port = 9000
+  internal_port = 8080
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
@@ -20,4 +20,4 @@ primary_region = 'fra'
   memory = '1gb'
   cpu_kind = 'shared'
   cpus = 1
-  memory_mb = 1024
+  memory_mb = 256
