@@ -58,7 +58,7 @@ docker-compose up --build
 
 ## API Usage
 
-API BASE URL(<https://customer-support-2021.herokuapp.com/api/v1>). It's recommended to attach a `Authorization` Header containing the generated `token` from `/api/v1/auth/signin` to access requests.
+API BASE URL(<https://customer-support-cold-flower-2535.fly.dev/api/v1>). It's recommended to attach a `Authorization` Header containing the generated `token` from `/api/v1/auth/signin` to access requests.
 
 ### Tickets endpoints `/tickets`
 
@@ -110,20 +110,11 @@ API BASE URL(<https://customer-support-2021.herokuapp.com/api/v1>). It's recomme
 
 ## API Docs
 
-<https://customer-support-2021.herokuapp.com/api/v1/docs> (change the Schemes to HTTPS)
+<https://customer-support-cold-flower-2535.fly.dev/api/v1/docs> (change the Schemes to HTTPS)
 
 ## App URL
 
-<https://customer-support-2021.herokuapp.com/api/v1>
-
-## Improvement
-
-- Customers should be able to comment after they created a ticket, incase they figured out the solution to the problem after raising the support ticket, and they don't need further assistance.
-- A customer should be able to report an agent if a ticket was handled misappropiately
-
-## Challenges faced
-
-- The report for the previous month is always generated when a call is made to the endpoint to get the report, I initially tried to upload the report to cloudinary but that caused duplication of different reports on clouinary, download as pdf option can be implemented on the frontend.
+<https://customer-support-cold-flower-2535.fly.dev/api/v1>
 
 ## Author
 
