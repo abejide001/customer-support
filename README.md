@@ -58,7 +58,7 @@ docker-compose up --build
 
 ## API Usage
 
-API BASE URL(<https://customer-support-cold-flower-2535.fly.dev/api/v1>). It's recommended to attach a `Authorization` Header containing the generated `token` from `/api/v1/auth/signin` to access requests.
+API BASE URL(<https://customer-support-autumn-brook-8578.fly.dev/api/v1/docs>). It's recommended to attach a `Authorization` Header containing the generated `token` from `/api/v1/auth/signin` to access requests.
 
 ### Tickets endpoints `/tickets`
 
@@ -110,11 +110,11 @@ API BASE URL(<https://customer-support-cold-flower-2535.fly.dev/api/v1>). It's r
 
 ## API Docs
 
-<https://customer-support-cold-flower-2535.fly.dev/api/v1/docs> (change the Schemes to HTTPS)
+<https://customer-support-autumn-brook-8578.fly.dev/api/v1/docs> (change the Schemes to HTTPS)
 
 ## App URL
 
-<https://customer-support-cold-flower-2535.fly.dev/api/v1>
+<https://customer-support-autumn-brook-8578.fly.dev/api/v1>
 
 ## Author
 
