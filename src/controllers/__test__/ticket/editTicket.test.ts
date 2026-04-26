@@ -3,7 +3,7 @@ import request from "supertest";
 import app from "../../../../app";
 
 it("returns a 401 if user is not authorized", async () => {
-  const id = mongoose.Types.ObjectId().toHexString();
+  const id = new mongoose.Types.ObjectId().toHexString();
   await request(app)
     .patch(`/api/v1/tickets/process/${id}`)
     .send({
@@ -13,7 +13,7 @@ it("returns a 401 if user is not authorized", async () => {
 });
 
 it("returns a 403 if the user is not an agent", async () => {
-  const id = mongoose.Types.ObjectId().toHexString();
+  const id = new mongoose.Types.ObjectId().toHexString();
   await request(app)
     .patch(`/api/v1/tickets/process/${id}`)
     .set("Authorization", `Bearer ${global.customerSignIn()}`)
@@ -24,7 +24,7 @@ it("returns a 403 if the user is not an agent", async () => {
 });
 
 it("returns a 404 if the user is an agent and ticket does not exist", async () => {
-  const id = mongoose.Types.ObjectId().toHexString();
+  const id = new mongoose.Types.ObjectId().toHexString();
   const response = await request(app)
     .patch(`/api/v1/tickets/process/${id}`)
     .set("Authorization", `Bearer ${global.agentSignIn()}`)

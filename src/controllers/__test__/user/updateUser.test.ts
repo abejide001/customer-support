@@ -3,17 +3,17 @@ import request from "supertest";
 import app from "../../../../app";
 
 it("returns a 401 if user is not authorized", async () => {
-  const id = mongoose.Types.ObjectId().toHexString();
+  const id = new mongoose.Types.ObjectId().toHexString();
   await request(app).patch(`/api/v1/users/${id}`).send().expect(401);
 });
 
 it("returns a 404 if the id is invalid", async () => {
-  const id = mongoose.Types.ObjectId().toHexString();
+  const id = new mongoose.Types.ObjectId().toHexString();
   await request(app).patch(`/api/v1/tickets/users/${id}`).send().expect(404);
 });
 
 it("returns a 403 if the user is not an admin", async () => {
-  const id = mongoose.Types.ObjectId().toHexString();
+  const id = new mongoose.Types.ObjectId().toHexString();
   await request(app)
     .patch(`/api/v1/users/${id}`)
     .set("Authorization", `Bearer ${global.customerSignIn()}`)
@@ -22,7 +22,7 @@ it("returns a 403 if the user is not an admin", async () => {
 });
 
 it("returns a 404 if the user is an admin and a customer does not exist", async () => {
-  const id = mongoose.Types.ObjectId().toHexString();
+  const id = new mongoose.Types.ObjectId().toHexString();
   const response = await request(app)
     .patch(`/api/v1/users/${id}`)
     .set("Authorization", `Bearer ${global.adminSignIn()}`)

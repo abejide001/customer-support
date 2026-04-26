@@ -1,10 +1,10 @@
-FROM node:alpine
+FROM node:22
 # Create app directory
 WORKDIR /usr/src/app
 # Install app dependencies
 COPY package*.json ./
 # Install dev dependencies only
-RUN npm i typescript@4.1.3 && \
+RUN npm i typescript && \
       npm install
 # Copy app source code
 COPY . .

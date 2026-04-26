@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/fliqpay-assessment
+    working_directory: ~/customer-support
     docker:
       - image: circleci/node:10.16.0
         environment:

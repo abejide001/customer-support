@@ -32,7 +32,7 @@ export const commentSchema = new mongoose.Schema(
   },
   {
     toJSON: {
-      transform(_, ret) {
+      transform(_, ret: any) {
         ret.id = ret._id;
         delete ret._id;
       },

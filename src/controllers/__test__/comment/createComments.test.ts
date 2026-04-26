@@ -3,7 +3,7 @@ import request from "supertest";
 import app from "../../../../app";
 
 it("returns 404 if the ticket does not exist", async () => {
-  const ticketId = mongoose.Types.ObjectId().toHexString();
+  const ticketId = new mongoose.Types.ObjectId().toHexString();
   const response = await request(app)
     .post(`/api/v1/comments/${ticketId}`)
     .set("Authorization", `Bearer ${global.agentSignIn()}`)

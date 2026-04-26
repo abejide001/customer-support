@@ -49,7 +49,7 @@ const ticketSchema = new mongoose.Schema(
   },
   {
     toJSON: {
-      transform(_, ret) {
+      transform(_, ret: any) {
         ret.id = ret._id;
         delete ret._id;
       },
@@ -61,10 +61,10 @@ ticketSchema.statics.build = (attrs: TicketAttrs) => {
   return new Ticket(attrs);
 };
 
-ticketSchema.pre("remove", function (next) {
-  this.model("Comment").remove({ ticketId: this._id }, next);
-  next();
-});
+// ticketSchema.pre("remove", function (next: NextFunction) {
+//   this.model("Comment").remove({ ticketId: this._id }, next);
+//   next();
+// });
 const Ticket = mongoose.model<TicketDoc, TicketModel>("Ticket", ticketSchema);
 
 export default Ticket;
